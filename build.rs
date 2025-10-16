@@ -53,7 +53,7 @@ fn main() {
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap_or_default();
 
     // The ABI of libc used by std is backward compatible with FreeBSD 12.
-    // The ABI of libc from crates.io is backward compatible with FreeBSD 12.
+    // The ABI of libc from crates.io is backward compatible with FreeBSD 13.
     //
     // On CI, we detect the actual FreeBSD version and match its ABI exactly,
     // running tests to ensure that the ABI is correct.
@@ -64,9 +64,9 @@ fn main() {
         println!("cargo:warning=setting FreeBSD version to {vers}");
         vers
     } else if libc_ci {
-        which_freebsd().unwrap_or(12)
+        which_freebsd().unwrap_or(13)
     } else {
-        12 // regardless of CARGO_FEATURE_RUSTC_DEP_OF_STD env var
+        13 // regardless of CARGO_FEATURE_RUSTC_DEP_OF_STD env var
     };
 
     match which_freebsd {
